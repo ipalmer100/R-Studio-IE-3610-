@@ -21,6 +21,7 @@ HOW TO USE:
 The "dataframe" files are designed to take in a sample of numbers provided in the problem statement (example data: 430.12, 390.91. 400.00, etc.)
 * Sample standard deviation and sample mean are automatically calculated, along with the number of values entered into the dataframe variable
 * Confidence intervals and other test results are returned using the print() function, all other variables can be viewed in the environment window in R studio
+
 The "summary" files are designed to take summary statistics as inputs such as sample mean, sample standard deviation, proportion, and other values
 * They have feature parity with the "dataframe" files, so equations and output functions used to solve problems should be the same
 
