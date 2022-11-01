@@ -1,4 +1,4 @@
-# Statistics Calculators (recommended to use in R Studio)
+# Statistics Calculators
 This repo holds my IE 3610 (Clemson University) .R files that I use to solve statistics problems.
 Midterm 1: Confidence Interval calculators
 Midterm 2: Sample statistic tests (p-value, Type II error, etc.)
