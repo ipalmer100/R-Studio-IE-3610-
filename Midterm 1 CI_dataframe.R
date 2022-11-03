@@ -38,7 +38,7 @@ print(paste("Lower Extreme Outliers: Less than",lowerExtreme))
 boxplot.default(DataSort)
 
 
-## Case 3 CI with given data
+## Case 3 CI with given data (z critical value)
 n = sum(table(DataFrame$Header)) # Counts your data values (n)
 mean = mean(DataFrame$Header) # Check sample mean
 s = sd(DataFrame$Header) # Check sample standard deviation
@@ -48,20 +48,20 @@ z = qnorm(alpha,lower.tail = FALSE)
 step1 = z*(s/N)
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
-Casetxt = "Case 3 =>"
+Casetxt = "Case 3 (z, unknown σ, estimate mean) =>"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 result_onesided = paste(Casetxt,OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
   print(result_onesided)
 }
 
-## Case 5 CI with given data
+## Case 5 CI with given data (t critical value)
 n = sum(table(DataFrame$Header)) # Counts your data values (n)
 mean = mean(DataFrame$Header) # Check mean
 s = sd(DataFrame$Header) # Check standard deviation
@@ -71,13 +71,13 @@ t = qt(alpha,n-1,lower.tail = FALSE)
 step1 = t*(s/N)
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
-Casetxt = "Case 5 =>"
+Casetxt = "Case 5 (t, estimate mean) =>"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 result_onesided = paste(Casetxt,OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
@@ -95,13 +95,13 @@ t = qt(alpha,n-1,lower.tail = FALSE)
 step1 = t*s*(sqrt(1+(1/n)))
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
-Casetxt = "Case 5 PI =>"
+Casetxt = "Case 5 Prediction Interval =>"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 result_onesided = paste(Casetxt,OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
@@ -109,7 +109,7 @@ if (bounds == 2){
 }
 
 
-## CASE 6 VARIANCE CI with given data
+## CASE 6 VARIANCE CI with given data (chi-squared critical value)
 n = sum(table(DataFrame$Header)) # Counts your data values (n)
 s = sd(DataFrame$Header) # Check standard deviation
 alpha = (1-confidence)/bounds
@@ -117,20 +117,20 @@ chiLO = qchisq(alpha,n-1,lower.tail = FALSE)
 chiHI = qchisq(1-alpha,n-1,lower.tail = FALSE)
 LowerB = ((n-1)*(s^2))/chiLO # Lower confidence bound
 UpperB = ((n-1)*(s^2))/chiHI # Upper confidence bound
-Casetxt = "2-sided variance interval =>"
+Casetxt = "Case 6 (chi-squared, estimate variance) =>"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 result_onesided = paste(Casetxt,OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
   print(result_onesided)
 }
 
-## CASE 6 STANDARD DEVIATION CI with given data
+## CASE 6 STANDARD DEVIATION CI with given data (chi-squared critical value)
 n = sum(table(DataFrame$Header)) # Counts your data values (n)
 s = sd(DataFrame$Header) # Check standard deviation
 alpha = (1-confidence)/bounds
@@ -138,13 +138,13 @@ chiLO = qchisq(alpha,n-1,lower.tail = FALSE)
 chiHI = qchisq(1-alpha,n-1,lower.tail = FALSE)
 LowerB = sqrt(((n-1)*(s^2))/chiLO) # Lower confidence bound
 UpperB = sqrt(((n-1)*(s^2))/chiHI) # Upper confidence bound
-Casetxt = "2-sided standard deviation interval =>"
-OneSidedLowertxt = "One-sided stdev lower:"
-OneSidedUppertxt = "One-sided stdev upper:"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 6 (chi-squared, estimate standard deviation) =>"
+OneSidedLowertxt = "One-sided lower:"
+OneSidedUppertxt = "One-sided upper:"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 result_onesided = paste(Casetxt,OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {

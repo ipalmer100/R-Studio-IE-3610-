@@ -18,7 +18,7 @@ bounds = 2 # Two-sided or one-sided interval?
 
 
 ## Case 1 and 2 ##
-Casetxt = "Case 1 & 2 =>"
+Casetxt = "Case 1 & 2 (z, known σ, estimate mean)=>"
 LowerBoundtxt = "Lower:"
 UpperBoundtxt = "Upper:"
 OneSidedLowertxt = "One-sided lower:"
@@ -31,7 +31,7 @@ step1 = z*(s_pop/N)
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
 result_onesided = paste(Casetxt, OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided) # print regular CI
 } else {
@@ -41,9 +41,9 @@ if (bounds == 2){
 
 
 ## Case 3 ##
-Casetxt = "Case 3 =>"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 3 (z, unknown σ, estimate mean) =>"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
 
@@ -54,7 +54,7 @@ step1 = z*(s/N)
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
 result_onesided = paste(Casetxt, OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
@@ -63,9 +63,9 @@ if (bounds == 2){
 
 
 ## Case 4 ##
-Casetxt = "Case 4 =>"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 4 (z, estimate proportion) =>"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
 alpha = (1-confidence)/bounds # alpha value finds area for critical value
@@ -75,7 +75,7 @@ step1 = z*(sqrt((p_hat*q_hat)/n))
 LowerB = p_hat - step1 # Lower confidence bound
 UpperB = p_hat + step1 # Upper confidence bound
 result_onesided = paste(Casetxt, OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
@@ -84,43 +84,40 @@ if (bounds == 2){
 
 
 ## Case 5 ##
-Casetxt = "Case 5 =>"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 5 (t, estimate mean) =>"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
-
 alpha = (1-confidence)/bounds
 N = sqrt(n)
 t = qt(alpha,n-1,lower.tail = FALSE)
 step1 = t*(s/N)
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
-Casetxt = "Case 5 =>"
 result_onesided = paste(Casetxt, OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
   print(result_onesided)
 }
 
+
 ## Case 5 PREDICTION ##
-Casetxt = "Case 5 =>"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 5 (t, estimate mean) =>"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 OneSidedLowertxt = "One-sided lower:"
 OneSidedUppertxt = "One-sided upper:"
-
 alpha = (1-confidence)/bounds
 N = sqrt(n)
 t = qt(alpha,n-1,lower.tail = FALSE)
 step1 = t*s*(sqrt(1+(1/n)))
 LowerB = mean - step1 # Lower confidence bound
 UpperB = mean + step1 # Upper confidence bound
-Casetxt = "Case 5 =>"
 result_onesided = paste(Casetxt, OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
@@ -129,9 +126,9 @@ if (bounds == 2){
 
 
 ## Case 6 Variance ##
-Casetxt = "Case 6 Variance =>"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 6 (chi-squared, estimate variance) =>"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 OneSidedLowertxt = "One-sided var lower:"
 OneSidedUppertxt = "One-sided var upper:"
 
@@ -141,7 +138,7 @@ chiHI = qchisq(1-alpha,n-1,lower.tail = FALSE)
 LowerB = ((n-1)*(s^2))/chiLO # Lower confidence bound
 UpperB = ((n-1)*(s^2))/chiHI # Upper confidence bound
 result_onesided = paste(OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
@@ -150,9 +147,9 @@ if (bounds == 2){
 
 
 ## Case 6 Standard Deviation ##
-Casetxt = "Case 6 StDev =>"
-LowerBoundtxt = "Lower:"
-UpperBoundtxt = "Upper:"
+Casetxt = "Case 6 (chi-squared, estimate standard deviation) =>"
+LowerBoundtxt = "["
+UpperBoundtxt = "]"
 OneSidedLowertxt = "One-sided stdev lower:"
 OneSidedUppertxt = "One-sided stdev upper:"
 
@@ -162,7 +159,7 @@ chiHI = qchisq(1-alpha,n-1,lower.tail = FALSE)
 LowerB = sqrt(((n-1)*(s^2))/chiLO) # Lower confidence bound
 UpperB = sqrt(((n-1)*(s^2))/chiHI) # Upper confidence bound
 result_onesided = paste(OneSidedLowertxt,LowerB,OneSidedUppertxt,UpperB)
-result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,UpperBoundtxt,UpperB)
+result_twosided = paste(Casetxt, LowerBoundtxt,LowerB,",",UpperB,UpperBoundtxt)
 if (bounds == 2){
   print(result_twosided)
 } else {
