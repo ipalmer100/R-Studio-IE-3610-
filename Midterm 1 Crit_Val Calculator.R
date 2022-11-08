@@ -33,7 +33,7 @@ qnorm(0.01,lower.tail = FALSE) # 98% two-sided CI
 qnorm(0.005,lower.tail = FALSE) # 99% two-sided CI
 
 qt(0.1,15,lower.tail=FALSE) # t (98% confidence, n = 16 ==> df = 15)
-qt(0.025,10,lower.tail=FALSE) # Central area = 0.95, df = 10,
+qt(0.025,6,lower.tail=FALSE) # Central area = 0.95, df = 10,
 qt(0.025,20,lower.tail=FALSE) # Central area = 0.95, df = 20
 qt(0.01,25,lower.tail=FALSE) # Upper-tail area = 0.01, df = 25
 qt(0.025,5,lower.tail=TRUE) # Lower-tail area = 0.025, df = 5 (from HW4)

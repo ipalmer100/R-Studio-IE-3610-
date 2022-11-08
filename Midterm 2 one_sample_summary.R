@@ -17,7 +17,7 @@ s = 0
 s_pop = 1500
 ### END DATA ENTRY ### 
 
-# RUN THIS: variable conditionals # 
+# RUN THIS: variable conditionals 
 if (Ha == "<>"){
   bounds = 2 # Ha: if not equal to (<>), then 2 ... if > or < , then 1
 } else if (Ha == ">"){
