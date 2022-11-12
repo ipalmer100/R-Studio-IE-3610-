@@ -39,18 +39,19 @@ writeLines(c(paste("Upper Mild Outliers: Between",upperMild,"&",upperExtreme),
 #boxplot.default(DataSort) # print box plot (optional)
 
 
-## Case 3: Non-normal population, large sample (unknown σ) (Chapter 8.2)
+## Case 3: Non-normal population, z-test, large sample (unknown σ) (Chapter 8.2)
 mean = mean(DataFrame$Header) # Check sample mean
 s = sd(DataFrame$Header) # Check sample standard deviation
 n = sum(table(DataFrame$Header)) # Counts your data values (n)
-critical = (mean - Null)/(s/sqrt(n))
+test_stat = (mean - Null)/(s/sqrt(n))
+abs_test = abs((mean - Null)/(s/sqrt(n)))
 # Evaluate p-value
 if (bounds == 2){
-  z = qnorm(alpha/2,lower.tail = FALSE)
-  p_value = 2*pnorm(critical)
+  z_critical = qnorm(alpha/2,lower.tail = FALSE)
+  p_value = 2*pnorm(abs_test,lower.tail = FALSE)
 } else {
-  z = qnorm(alpha,lower.tail = FALSE)
-  p_value = pnorm(critical)
+  z_critical = qnorm(alpha,lower.tail = FALSE)
+  p_value = pnorm(abs_test,lower.tail = FALSE)
 }
 if (p_value <= alpha){
   Eval = "Reject null!"
@@ -59,28 +60,29 @@ if (p_value <= alpha){
 }
 # Evaluate rejection
 writeLines(c(paste("Case 3 (z, unknown σ, estimate mean) =>"),
-             paste("critical =",critical,"| z =",z),
+             paste("Test Stat =",test_stat,"| Critical Value = ±",z_critical),
              paste("p-value =",p_value,"|","alpha =", alpha),Eval))
 
 
-## Case 5: One-sample t test for population mean (unknown σ) (Chapter 8.3)
+## Case 5: One-sample t-test for population mean (unknown σ) (Chapter 8.3)
 n = sum(table(DataFrame$Header)) # Counts your data values (n)
 mean = mean(DataFrame$Header) # Check mean
 s = sd(DataFrame$Header) # Check standard deviation
-critical = (mean - Null)/(s/sqrt(n))
+test_stat = (mean - Null)/(s/sqrt(n)) # test statistic
+abs_test = abs((mean - Null)/(s/sqrt(n)))
 # Evaluate p-value
 if (bounds == 2){
-  t = qt(alpha/2,n-1,lower.tail = FALSE)
-  p_value = 2*pt(critical,n-1)
+  t_critical = qt(alpha/2,n-1,lower.tail = FALSE)
+  p_value = 2*pt(abs_test,n-1,lower.tail = FALSE)
   CItype = "Two-Sided CI"
-  upperB = paste(mean + t*(s/sqrt(n)),"]")
-  lowerB = paste("[",mean - t*(s/sqrt(n)))
+  upperB = paste(mean + t_critical*(s/sqrt(n)),"]")
+  lowerB = paste("[",mean - t_critical*(s/sqrt(n)))
 } else {
-  t = qt(alpha,n-1,lower.tail = FALSE)
-  p_value = pt(critical,n-1)
+  t_critical = qt(alpha,n-1,lower.tail = FALSE)
+  p_value = pt(abs_test,n-1,lower.tail = FALSE)
   CItype = "Either/Or One-Sided CI"
-  upperB = paste("[-infinity,",mean + t*(s/sqrt(n)),"]")
-  lowerB = paste("[",mean - t*(s/sqrt(n)),"+infinity]")
+  upperB = paste("UB: [-infinity,",mean + t_critical*(s/sqrt(n)),"]")
+  lowerB = paste("LB: [",mean - t_critical*(s/sqrt(n)),"+infinity]")
 }
 if (p_value <= alpha){
   Eval = "Reject null!"
@@ -89,7 +91,7 @@ if (p_value <= alpha){
 }
 # Evaluate rejection
 writeLines(c(paste("Case 5 (t, estimate mean) =>"),
-             paste("critical =",critical,"| t =",t),
+             paste("Test Stat =",test_stat,"| Critical Value = ±",t_critical),
              paste("p-value =",p_value,"|","alpha =", alpha),Eval))
 # Evaluate CI
 writeLines(c(paste("Case 5:",CItype),
