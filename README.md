@@ -1,5 +1,6 @@
 # Statistics Calculators
 This repo holds my IE 3610 (Clemson University) .R files that I use to solve statistics problems.
+
 Midterm 1: Confidence Interval calculators - Use with Confidence Interval Formula Sheet.pdf
 Midterm 2: Hypothesis Testing calculators (p-value, Type II error, etc.) - Use with Hypothesis Testing Formula Sheet.pdf
 
