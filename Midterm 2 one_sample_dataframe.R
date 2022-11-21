@@ -7,7 +7,7 @@ rm(list = ls()) # Run to clear global environment
 
 ### DATA ENTRY ###
 # Enter problem statement values 
-DataFrame = data.frame(Header=c(-198,-336,-70,-18,-122,-9,-50,-5,-163,-86))
+DataFrame = data.frame(Header=c(198,336,70,18,122,9,50,5,163,86))
 DataFrame # Check new df
 Null = 25 # Null hypothesis value
 alpha = 0.05 # Set % confidence, ex) Alpha = 0.01, confidence = 0.99
@@ -60,7 +60,7 @@ if (p_value <= alpha){
 }
 # Evaluate rejection
 writeLines(c(paste("Case 3 (z, unknown σ, estimate mean) =>"),
-             paste("Test Stat =",test_stat,"| Critical Value = ±",z_critical),
+             paste("Test Stat = ±",test_stat,"| Critical Value = ±",z_critical),
              paste("p-value =",p_value,"|","alpha =", alpha),Eval))
 
 
@@ -91,7 +91,7 @@ if (p_value <= alpha){
 }
 # Evaluate rejection
 writeLines(c(paste("Case 5 (t, estimate mean) =>"),
-             paste("Test Stat =",test_stat,"| Critical Value = ±",t_critical),
+             paste("Test Stat = ±",test_stat,"| Critical Value = ±",t_critical),
              paste("p-value =",p_value,"|","alpha =", alpha),Eval))
 # Evaluate CI
 writeLines(c(paste("Case 5:",CItype),
