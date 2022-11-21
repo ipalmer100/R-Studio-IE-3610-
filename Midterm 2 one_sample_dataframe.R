@@ -10,8 +10,8 @@ rm(list = ls()) # Run to clear global environment
 DataFrame = data.frame(Header=c(198,336,70,18,122,9,50,5,163,86))
 DataFrame # Check new df
 Null = 25 # Null hypothesis value
-alpha = 0.05 # Set % confidence, ex) Alpha = 0.01, confidence = 0.99
-bounds = 1 # Two-sided or one-sided?
+alpha = 0.05 # Set % confidence, ex) Alpha = 0.01, then confidence = 0.99
+bounds = 1 # Two-sided or one-sided test?
 
 ### END DATA ENTRY ### 
 

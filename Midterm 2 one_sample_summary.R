@@ -6,14 +6,14 @@ rm(list = ls()) # Run to clear global environment
 ### INPUT ###
 ## Cases 1 - 3 ##
   # Fill in Ho (null hypothesis) and other parameters
-  Ho = 5.5 # Null hypothesis
-  Ha = "<>" # Change value in parentheses: >, <, or <>
-  mean = 5.6 # Also known as x̄ or μ'
-  n = 16 # Sample Size
+  Ho = 10 # Null hypothesis
+  Ha = ">" # Change value in parentheses: >, <, or <>
+  mean = 801 # Also known as x̄ or μ'
+  n = 28 # Sample Size
   alpha = 0.01
   beta = 0.01 # Only needed for sample size questions
   # sample (s) OR population (s_pop = σ (Case 1 only))
-  s = 0
+  s = 117
   s_pop = 0.3
 ## Case 4 (proportion test)
   p_Ho = 0.5
@@ -122,10 +122,18 @@ if (p_value <= alpha){
 } else {
   Eval = "Fail to reject Ho!"
 }
+# confidence intervals
+CI_high = mean + ((qt(alpha/2,n-1,lower.tail = FALSE))*s/sqrt(n)) # 2 sided hi
+CI_low = mean - ((qt(alpha/2,n-1,lower.tail = FALSE))*s/sqrt(n)) # 2 sided lo
+CI_lowerB = mean - ((qt(alpha,n-1,lower.tail = FALSE))*s/sqrt(n)) # 1 sided lo
+CI_upperB = mean + ((qt(alpha,n-1,lower.tail = FALSE))*s/sqrt(n)) # 1 sided hi
 # Evaluate rejection
 writeLines(c(paste("Case 3 (t, estimate mean) =>"),
              paste("Test Stat = ±",test_stat,"| Critical Value = ±",t_critical),
-             paste("p-value =",p_value,"|","alpha =", alpha),Eval))
+             paste("p-value =",p_value,"|","alpha =", alpha),Eval,
+             paste("Two-sided CI: [",CI_low,",",CI_high,"]"),
+             paste("One-sided Upper: (-∞,",CI_upperB,"]"),
+             paste("One-sided Lower: [",CI_lowerB,", +∞)")))
 
 
 ## Case 4: One-sample test for proportion (Chapter 8.4)

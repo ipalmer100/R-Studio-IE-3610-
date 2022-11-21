@@ -5,9 +5,12 @@
 rm(list = ls()) # Run to clear global environment
 
 ### INPUT ###
-DataFrame = data.frame(Header=c(15-16,26-24,66-42,115-80,62-78,64-63))
-Δ_null = 0
-Ha = "<>" # Change value in parentheses: >, <, or <>
+DataFrame = data.frame(Header=c(2126-1928,2885-2549,2895-2825,
+                                1942-1924,1750-1628,2184-2175,
+                                2164-2114,2626-2621,2006-1843,
+                                2627-2541))
+Δ_null = 25
+Ha = ">" # Change value in parentheses: >, <, or <>
 alpha = 0.05
 ### END INPUT ###
 
