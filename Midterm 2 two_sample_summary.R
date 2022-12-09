@@ -4,27 +4,27 @@ rm(list = ls()) # Run to clear global environment
 
 ### INPUT ###
 ## First Sample (Use this also for case 5) ##
-xbar = 29.8
+xbar = 801
 s1 = 117
-σ1 = 4 # population std dev
+σ1 = 1 # population std dev
 m = 80
 ## Second Sample ##
-ybar = 34.7
+ybar = 780
 s2 = 72 # sample s2
 σ2 = 5 # population s2
 n = 80
 ## Setup ##
 Δ_null = 0 # Ho and Ha difference in means variable
 Ha = "<>" # Change value in parentheses: >, <, or <>
-alpha = 0.05
+alpha = 0.01
 ## Optional ##
 Δ_hat = 5 # Case 1 type II error and sample size 
 mu1 = 0 # Case 4 pooled true mean 1
 mu2 = 0 # Case 4 pooled true mean 2
 beta = 0.01 # sample size calculations
 ## Case 6 Only ##
-p_hat_1 = 35/80
-p_hat_2 = 66/80
+p_hat_1 = 45/80
+p_hat_2 = 14/80
 p1 = 0.5
 p2 = 0.25
 m = m
@@ -233,6 +233,7 @@ pbar = ((m*p1)+(n*p2))/(m+n)
 qbar = ((m*q1)+(n*q2))/(m+n)
 σ = sqrt(((p1*q1)/m)+((p2*q2)/n))
 p_hat = ((m/(m+n))*p_hat_1) + ((n/(m+n))*p_hat_2)
+q_hat = 1-p_hat
 z_test = (p_hat_1 - p_hat_2)/sqrt((p_hat*(1-p_hat))*((1/m)+(1/n)))
 # p-value
 if (bounds == 2){
@@ -270,7 +271,7 @@ if (Ha == "<>"){
 }
 # sample size
 sample_n = ceiling((((qnorm(alpha,lower.tail = FALSE)*(sqrt((p1+p2)*(q1+q1))/2))+
-  (qnorm(beta,lower.tail = FALSE)*sqrt((p1*q1)+(p2*q2))))^2)/((p1-p2)^2))
+  (qnorm(beta,lower.tail = FALSE)*(sqrt((p1*q1)+(p2*q2))))^2)/((p1-p2)^2)))
 # evaluate
 writeLines(c(paste("Case 6: Difference in Proportions"),
              paste("Test Stat =",z_test,"| Critical Value = ±",z_critical),
