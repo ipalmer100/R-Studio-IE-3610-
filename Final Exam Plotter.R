@@ -51,8 +51,6 @@ writeLines(c(paste("SSE:",sse),
              paste("Standard Deviation Point Estimate:",s),
              paste("R-Squared:",r_squared)))
 
-alpha=0.05
-
 fit=lm(y~x)
 summary(fit)
 anova(fit)
