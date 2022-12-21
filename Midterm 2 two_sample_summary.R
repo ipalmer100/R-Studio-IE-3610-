@@ -1,35 +1,39 @@
 ### Midterm 2 Two-Sample Summary Statistics Calculator (IE 3610) ###
-# ctrl+L to clear console
-rm(list = ls()) # Run to clear global environment
+dev.off()  # But only if there IS a plot
+# Clear console
+cat("\014")  # ctrl+L
+# Clear global environment
+rm(list = ls())
+# -------------------------- USER DATA INPUT ------------------------------- #
 
-### INPUT ###
-## First Sample (Use this also for case 5) ##
-xbar = 801
-s1 = 117
-σ1 = 1 # population std dev
-m = 80
-## Second Sample ##
-ybar = 780
-s2 = 72 # sample s2
-σ2 = 5 # population s2
-n = 80
 ## Setup ##
 Δ_null = 0 # Ho and Ha difference in means variable
-Ha = "<>" # Change value in parentheses: >, <, or <>
-alpha = 0.01
+Ha = "<" # Alternative hypothesis input - change value to >, <, or <>
+alpha = 0.05
+## First Data Sample (Use this also for case 5) ##
+xbar = 801
+s1 = 117
+σ1 = 1.2 # population std dev
+m = 490
+## Second Data Sample ##
+ybar = 780
+s2 = 72 # sample s2
+σ2 = 1.1 # population s2
+n = 580
 ## Optional ##
-Δ_hat = 5 # Case 1 type II error and sample size 
+Δ_hat = 0 # Case 1 type II error and sample size 
 mu1 = 0 # Case 4 pooled true mean 1
 mu2 = 0 # Case 4 pooled true mean 2
 beta = 0.01 # sample size calculations
 ## Case 6 Only ##
-p_hat_1 = 45/80
-p_hat_2 = 14/80
+p_hat_1 = 170/490
+p_hat_2 = 240/580
 p1 = 0.5
 p2 = 0.25
 m = m
 n = n
-### END INPUT ###
+
+# -------------------------- END DATA INPUT ------------------------------- #
 
 # Determine alpha or alpha/2
 if (Ha == "<>"){
@@ -127,8 +131,8 @@ writeLines(c(paste("Case 2: Large Two Sample z-test"),
 
 ## Case 3: Two-sample t-tests for population mean (unknown σ) (Chapter 8.3)
 t_test = (xbar - ybar - Δ_null) / sqrt(((s1^2)/m) + ((s2^2)/n))
-v = ((((s1^2)/m) + ((s2^2)/n))^2)/
-  ((((((s1^2)/m))^2)/(m-1)) + (((((s2^2)/n))^2)/(n-1))) # degrees of freedom :(
+v = ceiling(((((s1^2)/m) + ((s2^2)/n))^2)/
+  ((((((s1^2)/m))^2)/(m-1)) + (((((s2^2)/n))^2)/(n-1)))) # degrees of freedom :(
 # p-value
 if (bounds == 2){
   t_critical = pt(alpha/2,v,lower.tail = FALSE)
@@ -257,7 +261,7 @@ CI_low = (p_hat_1 - p_hat_2) - (qnorm(alpha/2,lower.tail = FALSE))*
   sqrt(((p_hat_1*(1-p_hat_1))/m) + ((p_hat_2*(1-p_hat_2))/n)) # 2 side lo
 CI_high = (p_hat_1 - p_hat_2) + (qnorm(alpha/2,lower.tail = FALSE))*
   sqrt(((p_hat_1*(1-p_hat_1))/m) + ((p_hat_2*(1-p_hat_2))/n)) # 2 side hi
-# type II error
+# type II error formula chosen on alternative hypothesis input
 if (Ha == "<>"){
   Type_II_crit = ((z_critical*(sqrt(pbar*qbar*((1/m)+(1/n)))))-(p1-p2))/σ
   Type_II_crit_2 = ((-z_critical*(sqrt(pbar*qbar*((1/m)+(1/n)))))-(p1-p2))/σ

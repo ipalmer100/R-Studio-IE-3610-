@@ -1,20 +1,20 @@
-### Midterm 1 Critical Value Calculator (IE 3610) ###
-# ctrl+L to clear console
+### Midterm 1 Confidence Interval Calculator (IE 3610) ###
+## Generate Confidence Intervals Using Summary Statistics ##
+cat("\014")  # ctrl+L to clear console
 rm(list = ls()) # Run to clear global environment
 
 
-### DATA ENTRY ###
-# Set parameters you aren't using to 0
+# -------------------------- USER DATA INPUT ------------------------------- #
 
-mean = 0 # Sample mean (x bar)
-s = 0 # Case 3,4,5,6 standard deviation (s)
+mean = 801 # Sample mean (x bar)
+s = 117 # Case 3,4,5,6 standard deviation (s)
 s_pop = 0 # Case 1, 2 standard deviation (sigma)
-n = 2343 # number of data
+n = 28 # number of data
 p_hat = 0.53 # Case 4 proportion statistic
 confidence = 0.99 # Set % confidence
 bounds = 2 # Two-sided or one-sided interval?
 
-### END DATA ENTRY ### 
+# --------------------------- END DATA INPUT ------------------------------- #
 
 
 ## Case 1 and 2 ##

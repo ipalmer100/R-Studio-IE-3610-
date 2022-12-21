@@ -1,30 +1,31 @@
-### Midterm 2 Data Frame Calculator (IE 3610) ###
+### Midterm 2 Data Frame Calculator - IE 3610 ###
 # ctrl+L to clear console
-rm(list = ls()) # Run to clear global environment
-# If you're given data frames on an assignment, you likely have Case 5 #
+dev.off()  # But only if there IS a plot
+# Clear console
+cat("\014")  # ctrl+L
+# Clear global environment
+rm(list = ls())
 
-
-
-### DATA ENTRY ###
-# Enter problem statement values 
-DataFrame = data.frame(Header=c(198,336,70,18,122,9,50,5,163,86))
-DataFrame # Check new df
+# -------------------------- USER DATA INPUT ------------------------------- #
+DataFrame = data.frame(Header=c(198,336,70,18,122,9,50,5,163,86, 98, 110, 212,
+                                121, 99, 97))
 Null = 25 # Null hypothesis value
 alpha = 0.05 # Set % confidence, ex) Alpha = 0.01, then confidence = 0.99
 bounds = 1 # Two-sided or one-sided test?
 
-### END DATA ENTRY ### 
+# -------------------------- END DATA INPUT ------------------------------- #
 
-
+DataFrame # Output new data frame
 
 ## Descriptive Statistics ##
-DataSort = DataFrame[order(DataFrame$Header),] #sort ascending
-DataSort # view sorted data
+DataSort = DataFrame[order(DataFrame$Header),] #sort data ascending
+DataSort # view new sorted data
 summary(DataFrame$Header)
 sampleMean = mean(DataSort) # identical answer: mean(DataFrame$Header)
 sampleMedian = median(DataSort) # identical answer: median(DataFrame$Header)
 print(paste("Mean:",sampleMean))
 print(paste("Median:",sampleMedian))
+# Create variables to calculate interquartile range / outliers
 Q1 = summary(DataSort)[2] # First quartile
 Q3 = summary(DataSort)[5] # Second quartile
 IQR = IQR(DataSort)
@@ -32,12 +33,12 @@ upperMild = Q3+(1.5*IQR)
 upperExtreme = Q3+(3*IQR)
 lowerMild = Q1-(1.5*IQR)
 lowerExtreme = Q1-(3*IQR)
+# Output characteristics of outliers, mild and extreme
 writeLines(c(paste("Upper Mild Outliers: Between",upperMild,"&",upperExtreme),
              paste("Upper Extreme Outliers: >",upperExtreme),
              paste("Lower Mild Outliers: Between",lowerMild,"&",lowerExtreme),
              paste("Lower Extreme Outliers: <",lowerExtreme)))
-#boxplot.default(DataSort) # print box plot (optional)
-
+boxplot.default(DataSort) # print out a box plot to demonstrate data frame
 
 ## Case 3: Non-normal population, z-test, large sample (unknown σ) (Chapter 8.2)
 mean = mean(DataFrame$Header) # Check sample mean
@@ -89,7 +90,7 @@ if (p_value <= alpha){
 } else {
   Eval = "Fail to reject null!"
 }
-# Evaluate rejection
+# Evaluate whether or not to reject null hypothesis
 writeLines(c(paste("Case 5 (t, estimate mean) =>"),
              paste("Test Stat = ±",test_stat,"| Critical Value = ±",t_critical),
              paste("p-value =",p_value,"|","alpha =", alpha),Eval))
