@@ -6,6 +6,8 @@ Midterm 1: Confidence Interval calculators - Use with Confidence Interval Formul
 
 Midterm 2: Hypothesis Testing calculators (p-value, Type II error, etc.) - Use with Hypothesis Testing Formula Sheet.pdf
 
+Final Exam: Linear regression (use R file for data frames, excel for summary statistics)
+
 How to use:
 * Read your textbook question
   - Are you given statistics or a set of values? 
