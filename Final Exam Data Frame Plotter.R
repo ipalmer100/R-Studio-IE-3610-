@@ -12,13 +12,20 @@ rm(list = ls())
 library(ggplot2)
 
 ## IMPORT data1
-x <- c(80,75,76,65,60,55,73,84,86,45,40,55)
-y <- c(3.5,2.5,2.6,2.8,2.2,2.3,3.2,4.0,4.2,1.0,0.7,2.6)
-
+x <- c(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,
+       27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42)
+y <- c(1,7,49,238,1120,4263,16422,54859,184275,558186, 1662623, 4568683, 
+       12236101, 30929111, 75437595, 176541259, 394591391, 858218743, 
+       1763883894, 3568259802, 6746155945, 12673345045, 22010823988, 
+       38263228189, 60830813459, 97266114959, 140728569039, 205289508055, 
+       268057611944, 352626845666, 410378505447, 479206477733, 488906447183, 
+       496636890702, 433471730336, 370947887723, 266313901222, 183615682381, 
+       104004465349, 55156010773, 22695896495, 7811825938, 1459332899)
+length(y)
 data1 <- data.frame(x, y)
 
 alpha=0.005
-
+{
 mean(x)
 
 ## data1 ANALYSIS
@@ -27,9 +34,9 @@ plot(data1$x, data1$y, # Plot function
      pch = 19,         # Solid circle
      cex = 1,        # Make 1x size
      col = "#cc0000",  # Red
-     main = "Astringency in Wine", # Graph title
-     xlab = "Tannin Concentration", # X label
-     ylab = "Perceived Astringency") # Y label
+     main = "Number of legal 7 X 6 positions after n plies (A212693)", # Graph title
+     xlab = "n Plies", # X label
+     ylab = "Number of Positions") # Y label
 
 # Regression
 abline(lm(y~x,data=data1),col='blue') # Add regression line to graph
@@ -42,7 +49,7 @@ sst <- ssr + sse
 n = sum(table(data1))
 s = sqrt(sse/(n-2))
 r_squared = ssr/sst
-
+}
 # Output
 summary(model) # Summary statistics for data1 set (r^2 = 'Multiple R-squared')
 writeLines(c(paste("SSE:",sse),

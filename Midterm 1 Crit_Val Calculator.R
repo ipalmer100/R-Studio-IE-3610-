@@ -1,7 +1,12 @@
 ### Critical Value Calculator (IE 3610) ###
 # Extra file to help understand R's critical value functions
+
 # ctrl+L to clear console
-rm(list = ls()) # Run to clear global environment
+dev.off()  # But only if there IS a plot
+# Clear console
+cat("\014")  # ctrl+L
+# Clear global environment
+rm(list = ls())
 
 
 ## z, t, chi-squared Critical Value calculator
