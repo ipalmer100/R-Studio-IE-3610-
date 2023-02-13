@@ -2,25 +2,13 @@
 # Course: IE 3610
 
 
-# Clear plots
-dev.off()  # But only if there IS a plot
-# Clear console
-cat("\014")  # ctrl+L
-# Clear global environment
-rm(list = ls())
+rm(list = ls(all = TRUE)) #start with empty workspace
 
 library(ggplot2)
 
 ## IMPORT data1
-x <- c(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,
-       27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42)
-y <- c(1,7,49,238,1120,4263,16422,54859,184275,558186, 1662623, 4568683, 
-       12236101, 30929111, 75437595, 176541259, 394591391, 858218743, 
-       1763883894, 3568259802, 6746155945, 12673345045, 22010823988, 
-       38263228189, 60830813459, 97266114959, 140728569039, 205289508055, 
-       268057611944, 352626845666, 410378505447, 479206477733, 488906447183, 
-       496636890702, 433471730336, 370947887723, 266313901222, 183615682381, 
-       104004465349, 55156010773, 22695896495, 7811825938, 1459332899)
+x <- c(1,2,3,4,5,6)
+y <- c(133,183,285,640,1876,2550)
 length(y)
 data1 <- data.frame(x, y)
 
@@ -52,6 +40,7 @@ r_squared = ssr/sst
 }
 # Output
 summary(model) # Summary statistics for data1 set (r^2 = 'Multiple R-squared')
+
 writeLines(c(paste("SSE:",sse),
              paste("SSR:",ssr),
              paste("SST:",sst),
@@ -59,6 +48,7 @@ writeLines(c(paste("SSE:",sse),
              paste("Standard Deviation Point Estimate:",s),
              paste("R-Squared:",r_squared)))
 
+{
 fit=lm(y~x)
 summary(fit)
 anova(fit)
@@ -69,14 +59,17 @@ plot(fit)
 
 temp_var <-predict(fit, interval="prediction")
 new_df <- cbind(data1, temp_var)
+} # Run to see residuals vs fitted
 
+{
 ggplot(new_df, aes(x=x, y=y)) + 
   geom_point(color='#2980B9', size = 4) + 
   geom_line(aes(y=lwr), color="red", linetype="dashed")+
   geom_line(aes(y=upr), color="red", linetype="dashed")+
   geom_smooth(method=lm, color='#2C3E50') 
+} # Run to see interval chart
 
-
+{
 confint(fit, level=1-alpha)
 
 new_x <- data.frame(x=c(0.6,0.7)) 
@@ -163,5 +156,5 @@ mean.pred.intervals <- function(x, y, pred.x) {
 mean.pred.intervals(x, y, 0.6)
 
 mean.pred.intervals(x, y, 0.7)
-
+} # Run to see more output statistics
 
